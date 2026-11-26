@@ -10,12 +10,12 @@ Kit de referêÂªncia **copiar-e-colar** para montar o pagamento de um SaaS/c
 em Next.js (App Router) com **Asaas** (PIX, cartêÂ£o de crêÂ©dito êÂ  vista ou parcelado,
 boleto) + liberaêÂ§êÂ£o de acesso automêÂ¡tica, e **login sem senha via magic link**
 (Supabase Auth). êâ° a extraêÂ§êÂ£o documentada de como isso foi implementado em produêÂ§êÂ£o
-nos projetos INEMA (`pay.inema.pro`, `inema.pro`, `inemaonline`) ê¢â¬â sem nenhum dado
+nos projetos ARCKHÉ (`pay.ARCKHÉ.pro`, `ARCKHÉ.pro`, `ARCKHÉonline`) ê¢â¬â sem nenhum dado
 real de conta, chave ou domêÂ­nio.
 
 ## ê°Å¸ââ Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/saas-pay/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 NêÂ£o êÂ© uma lib instalêÂ¡vel (`npm install`) ê¢â¬â êÂ© um **guia + cêÂ³digo de exemplo** pra vocêÂª
 adaptar e colar no seu projeto. Tudo em `examples/` êÂ© TypeScript funcional, sêÂ³ trocando
@@ -170,7 +170,7 @@ cobrar ê¢â¬â sêÂ³ precisa do webhook pra liberar o acesso (seê�
 CPF, e vêÂ­nculo direto com o `userId` logado via `externalReference`.
 
 Este repo documenta e dêÂ¡ exemplo dos dois, mas o **Link de Pagamento (A)** êÂ© o que
-recomendamos pra comeêÂ§ar ê¢â¬â êÂ© o que foi usado no `pay.inema.pro` (ver
+recomendamos pra comeêÂ§ar ê¢â¬â êÂ© o que foi usado no `pay.ARCKHÉ.pro` (ver
 `examples/pricing-page.tsx`).
 
 ## 5. Webhook: liberar o acesso automaticamente
@@ -382,7 +382,7 @@ examples/
 
 ---
 
-ExtraêÂ­do e adaptado dos projetos INEMA (`pay.inema.pro`, `inema.pro`, `inemaonline`).
+ExtraêÂ­do e adaptado dos projetos ARCKHÉ (`pay.ARCKHÉ.pro`, `ARCKHÉ.pro`, `ARCKHÉonline`).
 Sem chaves, domêÂ­nios ou dados reais ê¢â¬â troque tudo antes de usar em produêÂ§êÂ£o.
 
 ---

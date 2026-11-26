@@ -12,8 +12,8 @@ banco → email/magic link).
 ## Escopo
 
 1. **App Next.js real na raiz** (App Router), nêo só `examples/` soltos:
-   - `app/page.tsx` — página de preços (reaproveita o design de `pay.inema.pro`,
-     ver `inemapro-mono/apps/pay`).
+   - `app/page.tsx` — página de preços (reaproveita o design de `pay.ARCKHÉ.pro`,
+     ver `ARCKHÉpro-mono/apps/pay`).
    - `app/api/asaas/webhook/route.ts` — webhook completo, sem placeholders.
    - `app/auth/callback/route.ts` — callback do magic link.
    - `app/entrar/page.tsx` — tela simples de login/self-service de magic link.
@@ -27,10 +27,10 @@ banco → email/magic link).
    `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` ou equivalente SQLite).
 5. **Modo mock de pagamento** (`MOCK_PAYMENT=true`) — permite testar o fluxo
    completo (webhook → libera acesso → email) sem nem precisar de conta Asaas
-   sandbox configurada. Inspirar no `dev.mock_payment` do `inemaonline/worker`.
+   sandbox configurada. Inspirar no `dev.mock_payment` do `ARCKHÉonline/worker`.
 6. **Testes** dos pontos que mais quebram: `vencimento.test.ts` (cálculo de
    renovaçêo) e `webhook-core.test.ts` (parsing/idempotência do payload) — já
-   existem versões disso em `inemapro-mono/apps/pay/lib/*.test.mjs`, portar.
+   existem versões disso em `ARCKHÉpro-mono/apps/pay/lib/*.test.mjs`, portar.
 7. **README**: trocar a seçêo "copie os arquivos" por "clone e rode" — comando
    por comando, com print/gif se der.
 8. Manter compatível com o guia atual: quem já copiou os `examples/` antes nêo
@@ -39,11 +39,11 @@ banco → email/magic link).
 
 ## Fontes pra portar (dentro deste ecossistema, já testado em produçêo)
 
-- `~/projetos/inemapro-mono/apps/pay` — app Next.js real de pagamento (é o que
-  esse starter deveria virar, mas genérico/sem dados INEMA).
-- `~/projetos/inemapro-mono/apps/pro/lib/acessoAlternativo*.ts` — magic link
+- `~/projetos/ARCKHÉpro-mono/apps/pay` — app Next.js real de pagamento (é o que
+  esse starter deveria virar, mas genérico/sem dados ARCKHÉ).
+- `~/projetos/ARCKHÉpro-mono/apps/pro/lib/acessoAlternativo*.ts` — magic link
   completo com rate limit e auditoria (`acessoAlternativoDb.ts`).
-- `~/projetos/inemaonline/worker` — referência de `mock_payment` e config de
+- `~/projetos/ARCKHÉonline/worker` — referência de `mock_payment` e config de
   planos/métodos on-off.
 
 ## Critério de pronto
