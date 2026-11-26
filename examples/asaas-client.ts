@@ -1,17 +1,17 @@
-// Cliente mínimo da API Asaas v3 — customer, payment (PIX/cartão à vista ou
+// Cliente mínimo da API Asaas v3 — customer, payment (PIX/cartêo à vista ou
 // parcelado/boleto) e QR Code do PIX. Sem dependências externas (fetch nativo).
 
 const PROD = 'https://api.asaas.com/v3';
 const SANDBOX = 'https://sandbox.asaas.com/api/v3';
 
 function baseUrl(key: string): string {
-  // Ambiente decidido pelo prefixo da própria chave — não precisa de flag separada.
+  // Ambiente decidido pelo prefixo da própria chave — nêo precisa de flag separada.
   return key.startsWith('$aact_prod') || key.startsWith('$aact_M') ? PROD : SANDBOX;
 }
 
 function headers(key: string) {
   return {
-    access_token: key, // Asaas usa header próprio, não "Authorization: Bearer"
+    access_token: key, // Asaas usa header próprio, nêo "Authorization: Bearer"
     'content-type': 'application/json',
   };
 }
@@ -29,7 +29,7 @@ export async function createOrGetCustomer(
 ): Promise<Customer> {
   const base = baseUrl(apiKey);
 
-  // Asaas não tem "upsert" nativo — busca por email primeiro pra não duplicar customer.
+  // Asaas nêo tem "upsert" nativo — busca por email primeiro pra nêo duplicar customer.
   const search = await fetch(`${base}/customers?email=${encodeURIComponent(input.email)}`, {
     headers: headers(apiKey),
   });
@@ -50,15 +50,15 @@ export type BillingType = 'PIX' | 'CREDIT_CARD' | 'BOLETO';
 export type CreatePaymentInput = {
   customer: string; // customer id
   billingType: BillingType;
-  value: number; // em REAIS (float), não centavos. Se for parcelado, é o valor da 1ª leitura — use totalValue abaixo.
+  value: number; // em REAIS (float), nêo centavos. Se for parcelado, é o valor da 1ª leitura — use totalValue abaixo.
   dueDate: string; // 'YYYY-MM-DD'
   description?: string;
   externalReference?: string; // seu id interno (userId, planoId...) — volta no webhook
-  /** Parcelamento no cartão. Use SÓ com billingType: 'CREDIT_CARD'. */
+  /** Parcelamento no cartêo. Use SÓ com billingType: 'CREDIT_CARD'. */
   installmentCount?: number; // em quantas vezes (ex.: 3, 6, 12)
   /** valor TOTAL da compra — o Asaas divide pelas installmentCount parcelas. */
   totalValue?: number;
-  /** alternativa a totalValue: valor de CADA parcela (não mande os dois). */
+  /** alternativa a totalValue: valor de CADA parcela (nêo mande os dois). */
   installmentValue?: number;
 };
 
@@ -110,11 +110,11 @@ export async function getCustomerEmail(apiKey: string, customerId: string): Prom
  * });
  * const qr = await getPixQrCode(key, payment.id); // mostra QR + copia-e-cola
  *
- * // Cartão parcelado em 3x
+ * // Cartêo parcelado em 3x
  * const payment = await createPayment(key, {
  *   customer: customer.id, billingType: 'CREDIT_CARD',
  *   value: 97.00, dueDate: '2026-08-05',
  *   installmentCount: 3, totalValue: 291.00,
  * });
- * redirect(payment.invoiceUrl); // Asaas hospeda a tela de cartão, você nunca vê o número
+ * redirect(payment.invoiceUrl); // Asaas hospeda a tela de cartêo, você nunca vê o número
  * ---------------------------------------------------------------------- */

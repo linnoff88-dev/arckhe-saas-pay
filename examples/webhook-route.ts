@@ -6,7 +6,7 @@ import { getCustomerEmail } from './asaas-client';
 import { calcVencimento, hojeSP } from './vencimento';
 // import { jaProcessado, inserirPagamento, upsertAssinante, enviarEmailDeAcesso } from './db';
 
-// service role + fetch → precisa de Node runtime, não Edge; nunca cachear.
+// service role + fetch → precisa de Node runtime, nêo Edge; nunca cachear.
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +15,7 @@ const EVENTOS_CONFIRMADOS = new Set(['PAYMENT_CONFIRMED', 'PAYMENT_RECEIVED']);
 function tokenValido(token: string, secret: string): boolean {
   const a = Buffer.from(token);
   const b = Buffer.from(secret);
-  // comparação em tempo constante — evita timing attack em vez de `token === secret`
+  // comparaçêo em tempo constante — evita timing attack em vez de `token === secret`
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
   }
 
   const tipoEvento = (event as { event?: string })?.event;
-  // Eventos que você não trata devem responder 200 (não 400/500) — senão o Asaas
+  // Eventos que você nêo trata devem responder 200 (nêo 400/500) — senêo o Asaas
   // fica re-tentando pra sempre achando que a entrega falhou.
   if (!EVENTOS_CONFIRMADOS.has(String(tipoEvento))) {
     return new NextResponse('ignored', { status: 200 });
@@ -72,13 +72,13 @@ export async function POST(request: Request) {
     if (!email && pag.customerId) email = await getCustomerEmail(apiKey, pag.customerId);
     if (!email) {
       console.error('[webhook] sem email do customer', { paymentId: pag.id, customerId: pag.customerId });
-      // notifique você mesmo (email/Telegram) — sem email não dá pra liberar acesso automaticamente
+      // notifique você mesmo (email/Telegram) — sem email nêo dá pra liberar acesso automaticamente
       return new NextResponse('ok (sem email)', { status: 200 });
     }
     email = email.trim().toLowerCase();
 
     // 4. Vencimento: soma a partir do vencimento atual se ainda for futuro
-    //    (renovação antecipada não perde dias), senão conta a partir de hoje.
+    //    (renovaçêo antecipada nêo perde dias), senêo conta a partir de hoje.
     // const assinante = await buscarAssinante(email);
     const vencimentoAtual: string | null = null; // = assinante?.vencimento ?? null
     const { tipo, dataVencimento } = calcVencimento(pag.valor, vencimentoAtual, hoje);
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
     console.log('[webhook] pagamento confirmado', { email, tipo, dataVencimento });
     return new NextResponse('ok', { status: 200 });
   } catch (e) {
-    // Erro inesperado → 500 de propósito: como as escritas acima são idempotentes,
+    // Erro inesperado → 500 de propósito: como as escritas acima sêo idempotentes,
     // o retry automático do Asaas é seguro e conserta sozinho.
     console.error('[webhook] erro', e);
     return new NextResponse('erro', { status: 500 });

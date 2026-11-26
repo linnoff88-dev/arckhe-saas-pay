@@ -1,11 +1,11 @@
 // Página de preços simples usando "Link de Pagamento" do Asaas (caminho A da
-// seção 4 do README) — zero backend pra cobrar, só um <a href> pro link fixo
+// seçêo 4 do README) — zero backend pra cobrar, só um <a href> pro link fixo
 // que você cria no painel Asaas por plano.
 export type Plano = {
   id: string;
   nome: string;
   preco: string;
-  precoDe?: string; // valor cheio riscado, se estiver em promoção
+  precoDe?: string; // valor cheio riscado, se estiver em promoçêo
   periodo: string;
   url: string; // link de pagamento do painel Asaas: https://www.asaas.com/c/XXXX
   badge?: string;
@@ -38,7 +38,7 @@ export default function PricingPage() {
   return (
     <main>
       <h1>Assine e destrave tudo — acesso na hora.</h1>
-      <p>Pague pelo Asaas (PIX, cartão ou boleto) e seu acesso é liberado automaticamente.</p>
+      <p>Pague pelo Asaas (PIX, cartêo ou boleto) e seu acesso é liberado automaticamente.</p>
 
       <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
         {PLANOS.map((p) => (
@@ -56,7 +56,7 @@ export default function PricingPage() {
                 <li key={b}>{b}</li>
               ))}
             </ul>
-            {/* dado de cartão nunca passa pelo seu servidor — o Asaas hospeda o checkout */}
+            {/* dado de cartêo nunca passa pelo seu servidor — o Asaas hospeda o checkout */}
             <a href={p.url}>Assinar {p.nome.toLowerCase()}</a>
           </div>
         ))}

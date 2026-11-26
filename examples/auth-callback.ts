@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
   if (tokenHash && type) {
     // Magic link gerado por admin.generateLink (ver magic-link.ts):
-    // verifyOtp NÃO exige code_verifier, então funciona mesmo o link
+    // verifyOtp NêO exige code_verifier, entêo funciona mesmo o link
     // tendo nascido no servidor (sem navegador iniciando o fluxo).
     const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
     if (error) {

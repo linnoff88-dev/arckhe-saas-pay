@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>saas-pay — Asaas (PIX, cartão, parcelado) + Magic Link, prontos pra copiar</title>
-<meta name="description" content="Guia de referência: cobrar com Asaas (PIX, cartão à vista, parcelado, boleto) e liberar acesso automaticamente, mais login sem senha via magic link (Supabase). Código de exemplo pra copiar no seu SaaS Next.js.">
+<title>saas-pay — Asaas (PIX, cartêo, parcelado) + Magic Link, prontos pra copiar</title>
+<meta name="description" content="Guia de referência: cobrar com Asaas (PIX, cartêo à vista, parcelado, boleto) e liberar acesso automaticamente, mais login sem senha via magic link (Supabase). Código de exemplo pra copiar no seu SaaS Next.js.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -117,7 +117,7 @@
     <div>
       <span class="chip">Guia de referência · Next.js</span>
       <h1>Cobrar com Asaas e logar sem senha, sem <span class="amb">reinventar</span> os dois</h1>
-      <p class="lead">PIX, cartão à vista, cartão parcelado e boleto via Asaas — com liberação de
+      <p class="lead">PIX, cartêo à vista, cartêo parcelado e boleto via Asaas — com liberaçêo de
       acesso automática pelo webhook — mais login por magic link (Supabase), prontos pra copiar
       pro seu SaaS. Documenta os erros sutis que custam horas: idempotência, PKCE, valor em
       centavos vs reais.</p>
@@ -126,19 +126,19 @@
         <a class="btn ghost" href="https://github.com/inematds/saas-pay" target="_blank" rel="noopener">Ver no GitHub</a>
       </div>
     </div>
-    <figure><img src="assets/hero.png" alt="Ilustração do fluxo de pagamento Asaas e login por magic link"></figure>
+    <figure><img src="assets/hero.png" alt="Ilustraçêo do fluxo de pagamento Asaas e login por magic link"></figure>
   </div>
 </header>
 
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
-  <h2>Não é uma lib pra instalar — é um guia pra copiar</h2>
-  <p class="sub">Extraído de produção (pay.inema.pro, inema.pro, inemaonline), sem chaves nem
+  <h2>Nêo é uma lib pra instalar — é um guia pra copiar</h2>
+  <p class="sub">Extraído de produçêo (pay.inema.pro, inema.pro, inemaonline), sem chaves nem
   dados reais. TypeScript funcional em <code>examples/</code>, pronto pra você adaptar nomes de
   tabela e colar no seu projeto.</p>
   <div class="grid g3">
-    <div class="card"><h3>💰 PIX, cartão e parcelado</h3><p>Cliente mínimo da API Asaas: customer, payment com <code>billingType</code> (PIX/CREDIT_CARD/BOLETO), parcelamento via <code>installmentCount</code>/<code>totalValue</code>, e QR Code do PIX.</p></div>
-    <div class="card"><h3>🔔 Webhook idempotente</h3><p>Rota completa com auth em tempo constante, dedup por <code>paymentId</code>, e a regra de quando responder 200 vs 500 pra não brigar com o retry do Asaas.</p></div>
+    <div class="card"><h3>💰 PIX, cartêo e parcelado</h3><p>Cliente mínimo da API Asaas: customer, payment com <code>billingType</code> (PIX/CREDIT_CARD/BOLETO), parcelamento via <code>installmentCount</code>/<code>totalValue</code>, e QR Code do PIX.</p></div>
+    <div class="card"><h3>🔔 Webhook idempotente</h3><p>Rota completa com auth em tempo constante, dedup por <code>paymentId</code>, e a regra de quando responder 200 vs 500 pra nêo brigar com o retry do Asaas.</p></div>
     <div class="card"><h3>🔑 Magic link sem PKCE</h3><p>Login sem senha via Supabase Admin API — documenta o bug clássico de usar <code>action_link</code> hospedado (quebra por falta de <code>code_verifier</code>) e como evitar com <code>verifyOtp</code>.</p></div>
   </div>
 </div></section>
@@ -146,10 +146,10 @@
 <section id="fluxo"><div class="wrap">
   <span class="chip">Como funciona</span>
   <h2>Do clique em "assinar" até o acesso liberado</h2>
-  <p class="sub">O dado de cartão nunca passa pelo seu servidor — o Asaas hospeda o checkout
+  <p class="sub">O dado de cartêo nunca passa pelo seu servidor — o Asaas hospeda o checkout
   (Link de Pagamento) ou você cria a cobrança via API e redireciona pro <code>invoiceUrl</code>.</p>
   <div class="flow">
-    <span>Cliente paga (PIX/cartão/boleto)</span><span class="arr">→</span>
+    <span>Cliente paga (PIX/cartêo/boleto)</span><span class="arr">→</span>
     <span>Asaas hospeda o checkout</span><span class="arr">→</span>
     <span>Webhook confirma pagamento</span><span class="arr">→</span>
     <span>Calcula vencimento</span><span class="arr">→</span>
@@ -169,14 +169,14 @@ ASAAS_WEBHOOK_SECRET=</pre></div>
     <div class="card"><h3>Projeto Supabase</h3><p>Auth com provider de email habilitado. Service role key só no servidor.</p><pre><span class="c"># supabase.com/dashboard → Settings → API</span>
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=</pre></div>
-    <div class="card"><h3>App Next.js (App Router)</h3><p>Onde os arquivos de <code>examples/</code> vão ser colados e adaptados.</p><pre><span class="k">npx create-next-app@latest</span>  <span class="c"># App Router</span></pre></div>
+    <div class="card"><h3>App Next.js (App Router)</h3><p>Onde os arquivos de <code>examples/</code> vêo ser colados e adaptados.</p><pre><span class="k">npx create-next-app@latest</span>  <span class="c"># App Router</span></pre></div>
   </div>
 </div></section>
 
 <section id="guia"><div class="wrap">
   <span class="chip">Guia de uso · passo a passo</span>
   <h2>Do clone até o pagamento liberando acesso</h2>
-  <p class="sub">Os arquivos de <code>examples/</code> são o ponto de partida — copie, troque
+  <p class="sub">Os arquivos de <code>examples/</code> sêo o ponto de partida — copie, troque
   nomes de tabela pelo seu schema, e siga a ordem abaixo.</p>
 
   <div class="step"><div class="b">1</div><div>
@@ -191,7 +191,7 @@ SUPABASE_SERVICE_ROLE_KEY=</pre></div>
     <h3>Configure o Asaas</h3>
     <p>Painel → Integrações → Chave de API (guarde como <code>ASAAS_API_KEY</code>). Painel →
     Webhooks → nova URL <code>https://seudominio.com/api/asaas/webhook</code>, eventos
-    <code>PAYMENT_CONFIRMED</code> e <code>PAYMENT_RECEIVED</code>, e um token de autenticação
+    <code>PAYMENT_CONFIRMED</code> e <code>PAYMENT_RECEIVED</code>, e um token de autenticaçêo
     (guarde como <code>ASAAS_WEBHOOK_SECRET</code>).</p>
 <pre><span class="c"># opcional: um Link de Pagamento por plano, pra vender sem nenhum código</span>
 <span class="k">Painel Asaas → Cobranças → Link de Pagamento</span></pre>
@@ -199,7 +199,7 @@ SUPABASE_SERVICE_ROLE_KEY=</pre></div>
 
   <div class="step"><div class="b">3</div><div>
     <h3>Copie o cliente Asaas e a rota de webhook</h3>
-    <p><code>examples/asaas-client.ts</code> tem customer, payment (PIX/cartão/parcelado/boleto)
+    <p><code>examples/asaas-client.ts</code> tem customer, payment (PIX/cartêo/parcelado/boleto)
     e QR Code do PIX. <code>examples/webhook-route.ts</code> já traz auth em tempo constante e a
     idempotência — só plugue suas funções de banco.</p>
 <pre><span class="k">cp examples/asaas-client.ts examples/webhook-route.ts examples/vencimento.ts</span> seu-projeto/lib/</pre>
@@ -219,7 +219,7 @@ SUPABASE_SERVICE_ROLE_KEY=</pre></div>
     <p>Chave Asaas sem prefixo <code>$aact_prod</code>/<code>$aact_M</code> = sandbox
     automaticamente. Pague um PIX de teste e confira: webhook recebido → assinante gravado →
     email com magic link → login funcionando.</p>
-<pre><span class="c"># só depois de validar em sandbox, troque pra chave de produção</span>
+<pre><span class="c"># só depois de validar em sandbox, troque pra chave de produçêo</span>
 ASAAS_API_KEY=$aact_prod_...</pre>
   </div></div>
 
@@ -239,7 +239,7 @@ ASAAS_API_KEY=$aact_prod_...</pre>
   <p class="sub">Registrado em <code>TODO.md</code> no repo.</p>
   <div class="phase"><div class="tag">v1</div><div class="d"><strong>Guia de referência (atual)</strong><span>README completo + examples/ pra copiar e adaptar.</span></div></div>
   <div class="phase"><div class="tag">v2</div><div class="d"><strong>Starter Next.js funcional</strong><span>App real que roda com <code>git clone</code> + <code>npm i</code> + <code>npm run dev</code>, com SQLite local e modo mock de pagamento pra testar sem conta configurada.</span></div></div>
-  <div class="phase"><div class="tag">v2</div><div class="d"><strong>Testes automatizados</strong><span>Cálculo de vencimento e parsing/idempotência do webhook cobertos por testes, portados do que já roda em produção.</span></div></div>
+  <div class="phase"><div class="tag">v2</div><div class="d"><strong>Testes automatizados</strong><span>Cálculo de vencimento e parsing/idempotência do webhook cobertos por testes, portados do que já roda em produçêo.</span></div></div>
 </div></section>
 
 <footer>

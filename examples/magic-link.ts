@@ -1,4 +1,4 @@
-// Geração de magic link (login sem senha) via Supabase Admin API.
+// Geraçêo de magic link (login sem senha) via Supabase Admin API.
 // Roda SÓ no servidor — usa a service role key, nunca exponha no client.
 import { createClient } from '@supabase/supabase-js';
 
@@ -20,7 +20,7 @@ export type GerarLinkResultado =
 export async function gerarLinkAcesso(input: GerarLinkInput): Promise<GerarLinkResultado> {
   const email = input.email.trim().toLowerCase();
 
-  // 1. NUNCA pule esta validação — sem ela, qualquer email digitado ganha login.
+  // 1. NUNCA pule esta validaçêo — sem ela, qualquer email digitado ganha login.
   // const vencimento = await getVencimento(email);
   // if (!isAssinaturaValida(vencimento)) {
   //   return { ok: false, motivo: vencimento ? 'expirado' : 'nao-assinante' };
@@ -36,16 +36,16 @@ export async function gerarLinkAcesso(input: GerarLinkInput): Promise<GerarLinkR
     return { ok: false, motivo: 'erro' };
   }
 
-  // 3. IMPORTANTE: não use `data.properties.action_link` (o link hospedado do
+  // 3. IMPORTANTE: nêo use `data.properties.action_link` (o link hospedado do
   // Supabase). Ele cai no fluxo PKCE (exchangeCodeForSession), que exige um
-  // `code_verifier` salvo no NAVEGADOR que iniciou o login — que não existe
+  // `code_verifier` salvo no NAVEGADOR que iniciou o login — que nêo existe
   // quando o link nasce no servidor via Admin API. Monte o link pro SEU
   // callback usando o token_hash cru; o callback faz verifyOtp (sem PKCE).
   const link = `${input.origin}/auth/callback?token_hash=${encodeURIComponent(
     data.properties.hashed_token,
   )}&type=magiclink`;
 
-  // 4. Log de auditoria — resolve "não recebi o link" e detecta abuso.
+  // 4. Log de auditoria — resolve "nêo recebi o link" e detecta abuso.
   // await registrarTentativa({ email, metodo: input.metodo, sucesso: true });
 
   return { ok: true, link };
